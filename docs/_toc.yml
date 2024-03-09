@@ -4,5 +4,5 @@
 format: jb-book
 root: index
 chapters:
-  - file: pythonplot
-  - file: plots/plotsjl
+  - file: tips-01-smooth
+  - file: tips-02-nanmath
