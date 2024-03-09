@@ -1,0 +1,113 @@
+name: Build notebooks and publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NPROC: '2' # Number of Julia processes to run the notebooks
+  CACHE_NUM: '1'
+  JULIA_CONDAPKG_BACKEND: 'Null'
+  JULIA_CI: 'true'
+  JULIA_NUM_THREADS: '2'
+  JULIA_CPU_TARGET: 'generic;znver3'
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      id: cp
+      with:
+        python-version: '3.x'
+    - name: Cache pip dependencies
+      uses: actions/cache@v4
+      id: cache-py
+      with:
+        save-always: 'true'
+        path: ${{ env.pythonLocation }}
+        key:  ${{ runner.os }}-pip-${{ steps.cp.outputs.python-version }}-${{ hashFiles('requirements.txt') }}
+    - name: Install pip dependencies if cache miss
+      if: ${{ steps.cache-py.outputs.cache-hit != 'true' }}
+      run: pip install -r requirements.txt
+    - name: Read Julia version
+      uses: SebRollen/toml-action@v1.2.0
+      id: read_toml
+      with:
+        file: 'Manifest.toml'
+        field: 'julia_version'
+    - name: Setup Julia
+      uses: julia-actions/setup-julia@v1
+      with:
+        version: ${{ steps.read_toml.outputs.value }}
+    - name: Restore Julia packages
+      uses: actions/cache/restore@v4
+      id: cache-julia
+      with:
+        path: |
+          ~/.julia
+          !~/.julia/registries
+        key: ${{ runner.os }}-julia-${{ env.CACHE_NUM }}-${{ hashFiles('src/**', 'Project.toml', 'Manifest.toml' )}}
+        restore-keys: |
+          ${{ runner.os }}-julia-${{ env.CACHE_NUM }}-
+    - name: Install Julia packages
+      if: ${{ steps.cache-julia.outputs.cache-hit != 'true' }}
+      env:
+        PYTHON: ${{ env.pythonLocation }}/python
+      run: julia --color=yes instantiate.jl
+    - name: Save Julia packages
+      uses: actions/cache/save@v4
+      if: ${{ steps.cache-julia.outputs.cache-hit != 'true' }}
+      with:
+        path: |
+          ~/.julia
+          !~/.julia/registries
+        key: ${{ steps.cache-julia.outputs.cache-primary-key }}
+    - name: Cache literate notebooks
+      uses: actions/cache@v4
+      id: cache-nb
+      with:
+        path: |
+          docs/**/*.ipynb
+          docs/**/*.sha
+        key: ${{ steps.cache-julia.outputs.cache-primary-key }}-nb-${{ hashFiles('docs/**/*.jl') }}
+        restore-keys: |
+          ${{ steps.cache-julia.outputs.cache-primary-key }}-nb-
+    - name: Run literate notebooks
+      if: ${{ steps.cache-nb.outputs.cache-hit != 'true' }}
+      run: julia --color=yes -p ${{ env.NPROC }} literate.jl
+    - name: Build website
+      run: jupyter-book build docs/
+    - name: Upload page artifact
+      if: ${{ github.ref == 'refs/heads/main' }}
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: docs/_build/html
+
+  # Deploy pages
+  deploy:
+    needs: CI
+    if: ${{ github.ref == 'refs/heads/main' }}
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+      actions: read   # to download an artifact uploaded by `actions/upload-pages-artifact@v3`
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
