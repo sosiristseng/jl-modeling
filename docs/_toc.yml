@@ -7,3 +7,4 @@ chapters:
   - file: tips-01-smooth
   - file: tips-02-nanmath
   - file: tips-03-2d-idx-from-1d
+  - file: tips-04-force-png
