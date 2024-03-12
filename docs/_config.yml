@@ -37,7 +37,7 @@ parse:
     # - smartquotes
     - substitution
     - tasklist
-  myst_url_schemes: [mailto, http, https] # URI schemes that will be recognised as external URLs in Markdown links
+  myst_url_schemes: [mailto, http, https] # URI schemes that will be recognized as external URLs in Markdown links
   myst_dmath_double_inline: true  # Allow display math ($$) within an inline context
 
 # Define the name of the latex output file for PDF builds
