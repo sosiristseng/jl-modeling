@@ -1,5 +1,7 @@
 #===
-# Differentiable switching
+# Differentiable smooth functions
+
+Sometimes smooth and differentiable functions are preferred to swtiching functions for differential equation solvers.
 
 ## Smmoth Heaviside step function
 
@@ -21,13 +23,30 @@ singlepulse(x, t0=0, t1=0.1, k=1000) = smoothheaviside(x - t0, k) * smoothheavis
 
 plot(singlepulse, -1, 1) |> PNG
 
-# ## Smooth minimal function
-function smoothmin(x, k=100)
-    y = x * k
-    return -log1pexp(-y)/k
+# ## Smooth absolute value
+# Inspired by: https://discourse.julialang.org/t/smooth-approximation-to-max-0-x/109383/13
+# Approximatly `abs(x)`
+function smooth_abs(x; c=1e-3)
+    hypot(x, c) - c
 end
 
-plot(smoothmin, -10, 10, label="Smooth min") |> PNG
+plot(smooth_abs, -10, 10, label="Smooth abs") |> PNG
+
+# ## Smooth max function
+# Approximatly `max(0, x)`
+function smooth_max(x; c=1e-3)
+    0.5 * (x + smooth_abs(x;c))
+end
+
+plot(smooth_max, -10, 10, label="Smooth max") |> PNG
+
+# ## Smooth minimal function
+# Approximatly `min(0, x)`
+function smooth_min(x; c=1e-3)
+    0.5 * (smooth_abs(x;c) - x)
+end
+
+plot(smooth_min, -10, 10, label="Smooth min") |> PNG
 
 # ## Periodic pulses
 # From: https://www.noamross.net/2015/11/12/a-smooth-differentiable-pulse-function/
