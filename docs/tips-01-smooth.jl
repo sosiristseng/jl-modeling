@@ -7,8 +7,7 @@ Sometimes smooth and differentiable functions are preferred to swtiching functio
 
 A [Heaviside step function](https://en.wikipedia.org/wiki/Heaviside_step_function) (0 when x < a, 1 when x > a) could be approximated with a steep [logistic function](https://en.wikipedia.org/wiki/Logistic_function).
 ===#
-using LogExpFunctions
-smoothheaviside(x, k=100) = logistic(x * k)
+smoothheaviside(x, k=100) = 1 / (1 + exp(-k * x))
 
 # The function output switches from zero to one around `x=0`.
 using Plots
