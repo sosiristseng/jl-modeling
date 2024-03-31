@@ -7,7 +7,9 @@ Sometimes smooth and differentiable functions are preferred to swtiching functio
 
 A [Heaviside step function](https://en.wikipedia.org/wiki/Heaviside_step_function) (0 when x < a, 1 when x > a) could be approximated with a steep [logistic function](https://en.wikipedia.org/wiki/Logistic_function).
 ===#
-smoothheaviside(x, k=100) = 1 / (1 + exp(-k * x))
+function smoothheaviside(x, k=100)
+    1 / (1 + exp(-k * x))
+end
 
 # The function output switches from zero to one around `x=0`.
 using Plots
@@ -18,22 +20,24 @@ plot(smoothheaviside, -1, 1) |> PNG
 # ## Smooth single pulse
 # A single pulse could be approximated with a product of two logistic functions.
 
-singlepulse(x, t0=0, t1=0.1, k=1000) = smoothheaviside(x - t0, k) * smoothheaviside(t1 - x, k)
+function singlepulse(x, t0=0, t1=0.1, k=1000)
+    smoothheaviside(x - t0, k) * smoothheaviside(t1 - x, k)
+end
 
 plot(singlepulse, -1, 1) |> PNG
 
 # ## Smooth absolute value
 # Inspired by: https://discourse.julialang.org/t/smooth-approximation-to-max-0-x/109383/13
 # Approximatly `abs(x)`
-function smooth_abs(x; c=1e-3)
-    hypot(x, c) - c
+function smooth_abs(x; c=(1//2)^10)
+    sqrt(x^2 + c^2) - c
 end
 
 plot(smooth_abs, -10, 10, label="Smooth abs") |> PNG
 
 # ## Smooth max function
 # Approximatly `max(0, x)`
-function smooth_max(x; c=1e-3)
+function smooth_max(x; c=(1//2)^10)
     0.5 * (x + smooth_abs(x;c))
 end
 
@@ -41,11 +45,18 @@ plot(smooth_max, -10, 10, label="Smooth max") |> PNG
 
 # ## Smooth minimal function
 # Approximatly `min(0, x)`
-function smooth_min(x; c=1e-3)
+function smooth_min(x; c=(1//2)^10)
     0.5 * (smooth_abs(x;c) - x)
 end
 
 plot(smooth_min, -10, 10, label="Smooth min") |> PNG
+
+# ## (Another) smooth step function
+function smooth_step(x; c=(1//2)^10)
+    0.5 * (x / (sqrt(x^2 + c)) + 1)
+end
+
+plot(smooth_step, -10, 10, label="Smooth step") |> PNG
 
 # ## Periodic pulses
 # From: https://www.noamross.net/2015/11/12/a-smooth-differentiable-pulse-function/
