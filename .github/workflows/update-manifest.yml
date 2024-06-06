@@ -16,9 +16,21 @@ concurrency:
 
 env:
   APP_ID: '189113' # https://github.com/apps/wen-wei-s-pr-bot
+  IMG: 'app:test'
 
 jobs:
   update-manifest:
+    strategy:
+      matrix:
+        dir:
+          - abm
+          - df
+          - diffeq
+          - catalyst
+          - pde
+          - ude
+          - visual
+      fail-fast: false
     permissions:
       contents: write
       pull-requests: write
@@ -26,14 +38,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Julia
-        uses: julia-actions/setup-julia@v2
-        with:
-          version: '1'
       - name: Update Julia dependencies
-        env:
-          JULIA_PKG_PRECOMPILE_AUTO: '0'
-        run: julia --project=@. --color=yes -e 'import Pkg; Pkg.update()'
+        run: >
+          docker run --rm -w /tmp
+          -v ${{ github.workspace }}:/tmp
+          -e JULIA_PKG_PRECOMPILE_AUTO=0
+          julia:latest
+          julia --project=docs/${{ matrix.dir }} --color=yes -e 'import Pkg; Pkg.update()'
       # Authenticate with a custom GitHub APP
       # https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#authenticating-with-github-app-generated-tokens
       - name: Generate token for PR
@@ -46,7 +57,8 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
-          title: Julia Dependency Update
+          title: Julia Dependency Update for ${{ matrix.dir }}
           token: ${{ steps.generate-token.outputs.token }}
+          branch: update-${{ matrix.dir }}
           labels: |
             automerge
