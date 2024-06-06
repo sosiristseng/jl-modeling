@@ -54,6 +54,3 @@ LocalPreferences.toml
 
 # PythonCall
 .CondaPkg
-
-# Generated notebooks
-*.ipynb
