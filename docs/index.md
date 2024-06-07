@@ -12,6 +12,9 @@ Notes and runnable examples of Julia programming language.
 
 ## Julia stack
 
+- [DataFrames tutorial](https://sosiristseng.github.io/jl-dataframes/)
+- [Universal differential equations (UDEs)](https://sosiristseng.github.io/jl-ude/)
+
 ### Package development
 
 - https://github.com/invenia/PkgTemplates.jl : templates to create new Julia packages.
@@ -48,11 +51,6 @@ Notes and runnable examples of Julia programming language.
   - https://github.com/JuliaSymbolics/Symbolics.jl : a computer algebra system (CAS) for symbolic calculations.
 - https://github.com/SciML/Catalyst.jl : a domain-specific language (DSL) for shemical reaction networks.
 - https://github.com/JuliaDynamics/Agents.jl : agent-based modeling (ABM).
-
-#### Universal differential equations (UDEs)
-
-- https://github.com/SciML/DiffEqFlux.jl : solving differential equations with neural networks.
-- https://github.com/SciML/NeuralPDE.jl : Physics-Informed Neural Networks (PINNs).
 
 #### Partial differential equations (PDEs)
 
