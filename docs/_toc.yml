@@ -4,16 +4,6 @@
 format: jb-book
 root: index
 parts:
-  - caption: Agent-based Models
-    chapters:
-    - file: abm/index
-      sections:
-      - file: abm/01-schelling
-      - file: abm/02-graph-sars2
-      - file: abm/03-social-distancing
-      - file: abm/04-flocking
-      - file: abm/05-event-multiagent
-      - file: abm/06-osmabm
   - caption: Differential Equations
     chapters:
     - file: diffeq/index

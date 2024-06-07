@@ -12,6 +12,7 @@ Notes and runnable examples of Julia programming language.
 
 ## Julia stack
 
+- [Agent-based modeling](https://sosiristseng.github.io/jl-abm/)
 - [DataFrames tutorial](https://sosiristseng.github.io/jl-dataframes/)
 - [Universal differential equations (UDEs)](https://sosiristseng.github.io/jl-ude/)
 
