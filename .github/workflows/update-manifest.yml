@@ -28,7 +28,6 @@ jobs:
           - diffeq
           - catalyst
           - pde
-          - ude
           - visual
       fail-fast: false
     permissions:

@@ -25,7 +25,6 @@ jobs:
           - diffeq
           - catalyst
           - pde
-          - ude
           - visual
     uses: ./.github/workflows/execute.yml
     with:
