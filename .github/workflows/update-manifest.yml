@@ -24,7 +24,6 @@ jobs:
       matrix:
         dir:
           - abm
-          - df
           - diffeq
           - catalyst
           - pde

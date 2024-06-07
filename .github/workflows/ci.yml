@@ -21,7 +21,6 @@ jobs:
       matrix:
         section:
           - abm
-          - df
           - diffeq
           - catalyst
           - pde
