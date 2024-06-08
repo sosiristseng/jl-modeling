@@ -54,3 +54,5 @@ LocalPreferences.toml
 
 # PythonCall
 .CondaPkg
+
+.vscode/
