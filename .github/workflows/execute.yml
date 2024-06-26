@@ -17,13 +17,13 @@ jobs:
       hash: ${{ steps.img.outputs.hash }}
     steps:
     - name: Checkout repository
-      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      uses: actions/checkout@v4
       with:
         sparse-checkout: |
           .github
           docs/${{ inputs.dir }}
     - name: Login to ghcr.io
-      uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3
+      uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner	}}
@@ -57,13 +57,13 @@ jobs:
       NB: docs/${{ inputs.dir }}/${{ matrix.notebook }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+        uses: actions/checkout@v4
         with:
           sparse-checkout: |
             .github
             docs/${{ inputs.dir }}
       - name: Restore notebook if present
-        uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        uses: actions/cache/restore@v4
         id: nb-cache
         with:
           path: ${{ env.NB }}
@@ -78,7 +78,7 @@ jobs:
           --ExecutePreprocessor.kernel_name=$(julia -e 'print("julia-1.",VERSION.minor)')
           ${{ env.NB }}
       - name: Cache notebook
-        uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        uses: actions/cache/save@v4
         if: ${{ steps.nb-cache.outputs.cache-hit != 'true' }}
         with:
           path: ${{ env.NB }}
@@ -87,7 +87,7 @@ jobs:
         id: art
         run: echo "name=$(echo ${{ env.NB }} | sed 's/\//-/g')" >> "$GITHUB_OUTPUT"
       - name: Upload Notebook
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4
+        uses: actions/upload-artifact@v4
         with:
           name: notebook-${{ steps.art.outputs.name }}
           path: docs*/${{ inputs.dir }}/${{ matrix.notebook }}  # keep folder structure
