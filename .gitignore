@@ -55,4 +55,5 @@ LocalPreferences.toml
 # PythonCall
 .CondaPkg
 
+# VSCode settings
 .vscode/
