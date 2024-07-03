@@ -5,9 +5,9 @@ manifest_format = "2.0"
 project_hash = "1176409f87f7992e48694d67cf4e4abaa5854281"
 
 [[deps.ADTypes]]
-git-tree-sha1 = "ae44a0c3d68a420d4ac0fa1f7e0c034ccecb6dc5"
+git-tree-sha1 = "7a6b285f217ba92b5b474b783b4c2e8cf8218aaa"
 uuid = "47edcb42-4c32-4615-8424-f2b9edc5f35b"
-version = "1.5.2"
+version = "1.5.3"
 weakdeps = ["ChainRulesCore", "EnzymeCore"]
 
     [deps.ADTypes.extensions]
@@ -295,9 +295,9 @@ version = "0.1.13"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
-git-tree-sha1 = "59939d8a997469ee05c4b4944560a820f9ba0d73"
+git-tree-sha1 = "b8fe8546d52ca154ac556809e10c75e6e7430ac8"
 uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
-version = "0.7.4"
+version = "0.7.5"
 
 [[deps.ColorSchemes]]
 deps = ["ColorTypes", "ColorVectorSpace", "Colors", "FixedPointNumbers", "PrecompileTools", "Random"]
@@ -918,16 +918,16 @@ deps = ["Random"]
 uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
 
 [[deps.GLFW_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll"]
-git-tree-sha1 = "ff38ba61beff76b8f4acad8ab0c97ef73bb670cb"
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll", "xkbcommon_jll"]
+git-tree-sha1 = "3f74912a156096bd8fdbef211eff66ab446e7297"
 uuid = "0656b61e-2033-5cc2-a64a-77c0f6c09b89"
-version = "3.3.9+0"
+version = "3.4.0+0"
 
 [[deps.GPUArrays]]
 deps = ["Adapt", "GPUArraysCore", "LLVM", "LinearAlgebra", "Printf", "Random", "Reexport", "Serialization", "Statistics"]
-git-tree-sha1 = "5c9de6d5af87acd2cf719e214ed7d51e14017b7a"
+git-tree-sha1 = "04661708f5301394a1f1be86a07a89e835900db6"
 uuid = "0c68f7d7-f131-5f86-a1c3-88cf8149b2d7"
-version = "10.2.2"
+version = "10.2.3"
 
 [[deps.GPUArraysCore]]
 deps = ["Adapt"]
@@ -984,9 +984,9 @@ version = "1.3.14+0"
 
 [[deps.Graphs]]
 deps = ["ArnoldiMethod", "Compat", "DataStructures", "Distributed", "Inflate", "LinearAlgebra", "Random", "SharedArrays", "SimpleTraits", "SparseArrays", "Statistics"]
-git-tree-sha1 = "334d300809ae0a68ceee3444c6e99ded412bf0b3"
+git-tree-sha1 = "ebd18c326fa6cee1efb7da9a3b45cf69da2ed4d9"
 uuid = "86223c79-3864-5bf0-83f7-82e725a168b6"
-version = "1.11.1"
+version = "1.11.2"
 
 [[deps.Grisu]]
 git-tree-sha1 = "53bb909d1151e57e2484c3d1b53e19552b887fb2"
@@ -1276,9 +1276,9 @@ version = "0.4.6"
 
 [[deps.Latexify]]
 deps = ["Format", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "OrderedCollections", "Requires"]
-git-tree-sha1 = "e0b5cd21dc1b44ec6e64f351976f961e6f31d6c4"
+git-tree-sha1 = "5b0d630f3020b82c0775a51d05895852f8506f50"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
-version = "0.16.3"
+version = "0.16.4"
 
     [deps.Latexify.extensions]
     DataFramesExt = "DataFrames"
@@ -1529,10 +1529,10 @@ version = "0.11.1"
     CategoricalArrays = "324d7699-5711-5eae-9e2f-1d82baa6b597"
 
 [[deps.Lux]]
-deps = ["ADTypes", "Adapt", "ArgCheck", "ArrayInterface", "ChainRulesCore", "Compat", "ConcreteStructs", "ConstructionBase", "EnzymeCore", "FastClosures", "Functors", "GPUArraysCore", "LinearAlgebra", "LossFunctions", "LuxCore", "LuxDeviceUtils", "LuxLib", "MacroTools", "Markdown", "PrecompileTools", "Preferences", "Random", "Reexport", "Setfield", "Statistics", "WeightInitializers"]
-git-tree-sha1 = "3753392695c76cebb4526fb8c86a1a2a673342a6"
+deps = ["ADTypes", "Adapt", "ArgCheck", "ArrayInterface", "ChainRulesCore", "Compat", "ConcreteStructs", "ConstructionBase", "EnzymeCore", "FastClosures", "Functors", "GPUArraysCore", "LinearAlgebra", "LossFunctions", "LuxCore", "LuxDeviceUtils", "LuxLib", "MacroTools", "Markdown", "Preferences", "Random", "Reexport", "Setfield", "Statistics", "UnrolledUtilities", "WeightInitializers"]
+git-tree-sha1 = "17417a7f00e43ea9041b04984ffcdb60804db9cb"
 uuid = "b2108857-7c20-44ae-9111-449ecde12c47"
-version = "0.5.57"
+version = "0.5.59"
 
     [deps.Lux.extensions]
     LuxAMDGPUExt = "AMDGPU"
@@ -1741,9 +1741,15 @@ version = "0.2.0"
 
 [[deps.MonteCarloMeasurements]]
 deps = ["Distributed", "Distributions", "ForwardDiff", "GenericSchur", "LinearAlgebra", "MacroTools", "Random", "RecipesBase", "Requires", "SLEEFPirates", "StaticArrays", "Statistics", "StatsBase", "Test"]
-git-tree-sha1 = "06f52e5ed720836e48005377d511b35557f56023"
+git-tree-sha1 = "f8677c39771d8ba127d537991d0eeb58bc658202"
 uuid = "0987c9cc-fe09-11e8-30f0-b96dd679fdca"
-version = "1.1.7"
+version = "1.2.0"
+
+    [deps.MonteCarloMeasurements.extensions]
+    MakieExt = "Makie"
+
+    [deps.MonteCarloMeasurements.weakdeps]
+    Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
@@ -2305,9 +2311,9 @@ version = "0.6.43"
 
 [[deps.SciMLBase]]
 deps = ["ADTypes", "Accessors", "ArrayInterface", "CommonSolve", "ConstructionBase", "Distributed", "DocStringExtensions", "EnumX", "FunctionWrappersWrappers", "IteratorInterfaceExtensions", "LinearAlgebra", "Logging", "Markdown", "PrecompileTools", "Preferences", "Printf", "RecipesBase", "RecursiveArrayTools", "Reexport", "RuntimeGeneratedFunctions", "SciMLOperators", "SciMLStructures", "StaticArraysCore", "Statistics", "SymbolicIndexingInterface", "Tables"]
-git-tree-sha1 = "7a6c5c8c38d2e37f45d4686c3598c20c1aebf48e"
+git-tree-sha1 = "281e82f2ae2b73262fed9e7a518711eb7feb7e59"
 uuid = "0bca4576-84f4-4d90-8ffe-ffa030f20462"
-version = "2.41.3"
+version = "2.42.0"
 
     [deps.SciMLBase.extensions]
     SciMLBaseChainRulesCoreExt = "ChainRulesCore"
@@ -2498,9 +2504,9 @@ weakdeps = ["OffsetArrays", "StaticArrays"]
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "PrecompileTools", "Random", "StaticArraysCore"]
-git-tree-sha1 = "20833c5b7f7edf0e5026f23db7f268e4f23ec577"
+git-tree-sha1 = "eeafab08ae20c62c44c8399ccb9354a04b80db50"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.9.6"
+version = "1.9.7"
 weakdeps = ["ChainRulesCore", "Statistics"]
 
     [deps.StaticArrays.extensions]
@@ -2717,9 +2723,9 @@ weakdeps = ["PDMats"]
     TrackerPDMatsExt = "PDMats"
 
 [[deps.TranscodingStreams]]
-git-tree-sha1 = "d73336d81cafdc277ff45558bb7eaa2b04a8e472"
+git-tree-sha1 = "60df3f8126263c0d6b357b9a1017bb94f53e3582"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
-version = "0.10.10"
+version = "0.11.0"
 weakdeps = ["Random", "Test"]
 
     [deps.TranscodingStreams.extensions]
@@ -2798,15 +2804,20 @@ weakdeps = ["ConstructionBase", "InverseFunctions"]
 
 [[deps.UnitfulLatexify]]
 deps = ["LaTeXStrings", "Latexify", "Unitful"]
-git-tree-sha1 = "e2d817cc500e960fdbafcf988ac8436ba3208bfd"
+git-tree-sha1 = "975c354fcd5f7e1ddcc1f1a23e6e091d99e99bc8"
 uuid = "45397f5d-5981-4c77-b2b3-fc36d6e9b728"
-version = "1.6.3"
+version = "1.6.4"
 
 [[deps.Unityper]]
 deps = ["ConstructionBase"]
 git-tree-sha1 = "25008b734a03736c41e2a7dc314ecb95bd6bbdb0"
 uuid = "a7c27f48-0311-42f6-a7f8-2c11e75eb415"
 version = "0.1.6"
+
+[[deps.UnrolledUtilities]]
+git-tree-sha1 = "b73f7a7c25a2618c5052c80ed32b07e471cc6cb0"
+uuid = "0fe1646c-419e-43be-ac14-22321958931b"
+version = "0.1.2"
 
 [[deps.UnsafeAtomics]]
 git-tree-sha1 = "6331ac3440856ea1988316b46045303bef658278"
@@ -2856,15 +2867,23 @@ version = "1.31.0+0"
 
 [[deps.WeightInitializers]]
 deps = ["ChainRulesCore", "GPUArraysCore", "LinearAlgebra", "PartialFunctions", "Random", "SpecialFunctions", "Statistics"]
-git-tree-sha1 = "c65474b1dcd519d6c4bc748c040a3fd6fc269a10"
+git-tree-sha1 = "5d58804eb7769659cec28aae6cbfc7762cea0c31"
 uuid = "d49dbf32-c5c2-4618-8acc-27bb2598ef2d"
-version = "0.1.8"
+version = "0.1.9"
 
     [deps.WeightInitializers.extensions]
-    WeightInitializersCUDAExt = "CUDA"
+    WeightInitializersAMDGPUExt = ["AMDGPU", "GPUArrays"]
+    WeightInitializersCUDAExt = ["CUDA", "GPUArrays"]
+    WeightInitializersGPUArraysExt = "GPUArrays"
+    WeightInitializersMetalExt = ["Metal", "GPUArrays"]
+    WeightInitializersoneAPIExt = ["oneAPI", "GPUArrays"]
 
     [deps.WeightInitializers.weakdeps]
+    AMDGPU = "21141c5a-9bdb-4563-92ae-f87d6854732e"
     CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
+    GPUArrays = "0c68f7d7-f131-5f86-a1c3-88cf8149b2d7"
+    Metal = "dde4c033-4e86-420c-a63e-0dd931031962"
+    oneAPI = "8f75cd03-7ff8-4ecb-9b8f-daf728133b1b"
 
 [[deps.WoodburyMatrices]]
 deps = ["LinearAlgebra", "SparseArrays"]
