@@ -27,6 +27,7 @@ jobs:
           - catalyst
           - pde
           - visual
+          - ude
       fail-fast: false
     permissions:
       contents: write

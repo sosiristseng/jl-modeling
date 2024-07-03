@@ -28,6 +28,12 @@ parts:
       - file: pde/01-sis
       - file: pde/02-heat
       - file: pde/03-brusselator
+  - caption: Universal Differential Equations
+    chapters:
+    - file: ude/01-firstexample
+    - file: ude/02-multishooting
+    - file: ude/03-neuralode
+    - file: ude/04-poisson
   - caption: Visualization
     chapters:
     - file: visual/plotsjl-gallery

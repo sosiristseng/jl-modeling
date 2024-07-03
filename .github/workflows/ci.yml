@@ -24,6 +24,7 @@ jobs:
           - catalyst
           - pde
           - visual
+          - ude
     uses: ./.github/workflows/execute.yml
     with:
       dir: ${{ matrix.section }}
