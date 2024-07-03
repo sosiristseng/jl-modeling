@@ -15,6 +15,6 @@ jobs:
       with:
         account: user
         token: ${{ secrets.GITHUB_TOKEN }}
-        image-names: jl-modeling
+        image-names: ${{ github.event.repository.name }}
         cut-off: 2w
         dry-run: false
