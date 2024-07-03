@@ -16,5 +16,5 @@ jobs:
         account: user
         token: ${{ secrets.GITHUB_TOKEN }}
         image-names: jl-modeling
-        cut-off: 2w 3d
-        dry-run: true
+        cut-off: 2w
+        dry-run: false
