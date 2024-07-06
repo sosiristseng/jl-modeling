@@ -1,4 +1,4 @@
-name: CI with dynamic parallel matrix
+name: CI
 
 on:
   workflow_dispatch:
@@ -11,8 +11,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
-permissions:
-  packages: write
+env:
+  NBCONVERT_JOBS: '4'
+  LITERATE_PROC: '3'
+  ALLOWERRORS: 'false'
+  CACHE_NUM: '1'
+  NBCACHE: '.cache'
 
 jobs:
   execute:
@@ -25,9 +29,59 @@ jobs:
           - pde
           - visual
           - ude
-    uses: ./.github/workflows/execute.yml
-    with:
-      dir: ${{ matrix.section }}
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: |
+          .github
+          docs/${{ matrix.section }}
+    - name: Login to ghcr.io
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner	}}
+        password: ${{ github.token }}
+    - name: Get docker image hash
+      id: img
+      run: echo "hash=${{ hashFiles('**/Manifest.toml', 'env.Dockerfile', 'requirements.txt') }}" >> "$GITHUB_OUTPUT"
+    - name: Build and push docker image
+      env:
+        IMG: ghcr.io/${{ github.repository }}:${{ steps.img.outputs.hash }}
+      run: |
+        docker manifest inspect ${IMG} && exit 0
+        cp requirements.txt docs/${{ matrix.section }}
+        docker build -f env.Dockerfile -t ${IMG} docs/${{ matrix.section }}
+        docker push ${IMG}
+    - name: Cache executed notebooks
+      uses: actions/cache@v4
+      id: cache-nb
+      with:
+        path: ${{ env.NBCACHE }}
+        key: ${{ runner.os }}-nb-${{ env.CACHE_NUM }}-${{ steps.img.outputs.hash }}-${{ hashFiles('docs/**/*.ipynb', 'docs/**/*.jl') }}
+        restore-keys: |
+          ${{ runner.os }}-nb-${{ env.CACHE_NUM }}-${{ steps.img.outputs.hash }}-
+    - name: Execute Notebook
+      if: ${{ steps.cache-nb.outputs.cache-hit != 'true' }}
+      env:
+        IMG: ghcr.io/${{ github.repository }}:${{ steps.img.outputs.hash }}
+      run: >
+        docker run --rm -w /tmp -v ${{ github.workspace }}:/tmp
+        -e PROJ_DIR=docs/${{ matrix.section }}
+        -e NBCACHE=${{ env.NBCACHE }}
+        -e NBCONVERT_JOBS=${{ env.NBCONVERT_JOBS }}
+        -e ALLOWERRORS=${{ env.ALLOWERRORS }}
+        ${{ env.IMG }}
+        julia --color=yes -p ${{ env.LITERATE_PROC }} --heap-size-hint=4G run.jl
+    - name: Upload Notebook
+      uses: actions/upload-artifact@v4
+      with:
+        name: notebook-${{ matrix.section }}
+        path: ${{ env.NBCACHE }}
+        retention-days: 1
 
   render:
     needs: execute
@@ -38,9 +92,13 @@ jobs:
       - name: Download notebooks
         uses: actions/download-artifact@v4
         with:
-          path: out/
+          path: ${{ env.NBCACHE }}/
+          pattern: notebook-*
+          merge-multiple: true
+      - name: Display structure of downloaded files
+        run: ls -R ${{ env.NBCACHE }}
       - name: Copy back built notebooks
-        run: for d in out/notebook-*; do cp --verbose -rf "$d"/docs/* docs/; done
+        run: cp --verbose -rf ${{ env.NBCACHE }}/docs/* docs/
       - name: Setup Python
         uses: actions/setup-python@v5
         id: setup-python

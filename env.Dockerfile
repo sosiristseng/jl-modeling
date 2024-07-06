@@ -14,8 +14,9 @@ COPY --from=julia ${JULIA_PATH} ${JULIA_PATH}
 WORKDIR /work
 
 # Python dependencies
-RUN pip install --no-cache-dir nbconvert matplotlib
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Julia dependencies
 COPY Project.toml Manifest.toml ./
-RUN julia --color=yes -e 'using Pkg; Pkg.add(["IJulia"]); import IJulia; IJulia.installkernel("Julia", "--project=@."); Pkg.activate("."); Pkg.instantiate(); Pkg.precompile()'
+RUN julia --color=yes -e 'using Pkg; Pkg.add(["IJulia", "Literate", "PrettyTables", "JSON"]); Pkg.activate("."); Pkg.instantiate(); Pkg.precompile()'
