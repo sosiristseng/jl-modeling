@@ -28,6 +28,7 @@ jobs:
           - pde
           - visual
           - ude
+          - df
       fail-fast: false
     permissions:
       contents: write

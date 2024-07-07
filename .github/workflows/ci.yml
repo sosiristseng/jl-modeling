@@ -29,6 +29,7 @@ jobs:
           - pde
           - visual
           - ude
+          - df
     runs-on: ubuntu-latest
     permissions:
       packages: write
