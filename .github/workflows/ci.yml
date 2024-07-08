@@ -30,6 +30,7 @@ jobs:
           - visual
           - ude
           - df
+          - abm
     runs-on: ubuntu-latest
     permissions:
       packages: write
