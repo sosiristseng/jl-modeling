@@ -28,7 +28,7 @@ end
 reactions(repressilator)
 
 # State variables in the reaction network
-states(repressilator)
+unknowns(repressilator)
 
 # Parameters in the reaction network
 parameters(repressilator)

@@ -21,8 +21,8 @@ setdefaults!(rn, [:A => 1.0, :B => 2.0, :C => 0.0, :k₊ => 1.0, :k₋ => 1.0])
 # The conserved quantities will be denoted as `Γ`s
 osys = convert(ODESystem, rn; remove_conserved=true)
 
-# Only one state variable (unknown) need to be solved
-states(osys)
+# Only one (unknown) state variable need to be solved
+unknowns(osys)
 
 # The other two are constrained by conserved quantities
 observed(osys)
