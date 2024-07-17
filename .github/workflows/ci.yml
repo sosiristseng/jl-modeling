@@ -25,7 +25,6 @@ jobs:
       matrix:
         section:
           - diffeq
-          - catalyst
           - pde
           - visual
           - ude

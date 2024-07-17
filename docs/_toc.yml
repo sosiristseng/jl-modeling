@@ -18,11 +18,9 @@ parts:
       - file: diffeq/08-symbolics
       - file: diffeq/09-tips
       - file: diffeq/model-01-neuron
-    - file: catalyst/index
-      sections:
-      - file: catalyst/01-repressilator
-      - file: catalyst/02-generate-reactions
-      - file: catalyst/03-tips
+      - file: diffeq/cat-01-repressilator
+      - file: diffeq/cat-02-generate-reactions
+      - file: diffeq/cat-03-tips
     - file: pde/index
       sections:
       - file: pde/01-sis
