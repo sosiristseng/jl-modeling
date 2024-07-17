@@ -19,10 +19,10 @@ setdefaults!(rn, [:A => 1.0, :B => 2.0, :C => 0.0, :k₊ => 1.0, :k₋ => 1.0])
 
 # Let's convert it to a system of ODEs, using the conservation laws to eliminate two species, leaving only one of them as the state variable.
 # The conserved quantities will be denoted as `Γ`s
-osys = convert(ODESystem, rn; remove_conserved=true)
+osys = convert(ODESystem, rn; remove_conserved=true) |> structural_simplify
 
-# Only one state variable (unknown) need to be solved
-states(osys)
+# Only one (unknown) state variable need to be solved
+unknowns(osys)
 
 # The other two are constrained by conserved quantities
 observed(osys)

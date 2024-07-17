@@ -48,7 +48,7 @@ jobs:
         password: ${{ github.token }}
     - name: Get docker image hash
       id: img
-      run: echo "hash=${{ hashFiles('**/Manifest.toml', 'env.Dockerfile', 'requirements.txt') }}" >> "$GITHUB_OUTPUT"
+      run: echo "hash=${{ hashFiles('**/Project.toml', '**/Manifest.toml', 'env.Dockerfile', 'requirements.txt') }}" >> "$GITHUB_OUTPUT"
     - name: Build and push docker image
       env:
         IMG: ghcr.io/${{ github.repository }}:${{ steps.img.outputs.hash }}
