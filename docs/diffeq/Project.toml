@@ -20,3 +20,11 @@ SimpleUnPack = "ce78b400-467f-4804-87d8-8f486da07d0a"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 Symbolics = "0c5d862f-8b57-4792-8d23-62f2024744c7"
+
+[preferences.BoundaryValueDiffEq]
+PrecompileMIRK = false
+PrecompileMIRKNLLS = false
+PrecompileMultipleShooting = false
+PrecompileMultipleShootingNLLS = false
+PrecompileShooting = false
+PrecompileShootingNLLS = false

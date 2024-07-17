@@ -28,7 +28,7 @@ end
 reactions(repressilator)
 
 # State variables in the reaction network
-states(repressilator)
+unknowns(repressilator)
 
 # Parameters in the reaction network
 parameters(repressilator)
@@ -47,7 +47,7 @@ u₀ = [m₁ => 0.0, m₂ => 0.0, m₃ => 0.0, P₁ => 20.0, P₂ => 0.0, P₃ =
 
 # Then we can solve this reaction network
 tspan = (0.0, 10000.0)
-oprob = ODEProblem(odesys, u₀, tspan, p)
+oprob = ODEProblem(repressilator, u₀, tspan, p)
 sol = solve(oprob)
 plot(sol)
 
