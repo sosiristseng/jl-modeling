@@ -58,9 +58,9 @@ version = "1.1.1"
 
 [[deps.Agents]]
 deps = ["CSV", "CommonSolve", "DataFrames", "DataStructures", "Distributed", "Distributions", "Downloads", "DynamicSumTypes", "Graphs", "JLD2", "LazyArtifacts", "LightOSM", "LinearAlgebra", "MacroTools", "PrecompileTools", "ProgressMeter", "Random", "Rotations", "Scratch", "StaticArrays", "StatsBase", "StreamSampling"]
-git-tree-sha1 = "3cec9896c841212e5bcb71d1961dfebc01a96cfe"
+git-tree-sha1 = "87e6a9b7dab00dd6973e776dd8395dc4ca14ed34"
 uuid = "46ada45e-f475-11e8-01d0-f70cc89e6671"
-version = "6.0.17"
+version = "6.1.0"
 
     [deps.Agents.extensions]
     AgentsArrow = "Arrow"
@@ -237,9 +237,9 @@ version = "0.2.4"
 
 [[deps.Compat]]
 deps = ["TOML", "UUIDs"]
-git-tree-sha1 = "b1c55339b7c6c350ee89f2c1604299660525b248"
+git-tree-sha1 = "8ae8d32e09f0dcf42a36b90d4e17f5dd2e4c4215"
 uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
-version = "4.15.0"
+version = "4.16.0"
 weakdeps = ["Dates", "LinearAlgebra"]
 
     [deps.Compat.extensions]
@@ -367,10 +367,10 @@ uuid = "fa6b7ba4-c1ee-5f82-b5fc-ecf0adba8f74"
 version = "0.6.8"
 
 [[deps.DynamicSumTypes]]
-deps = ["ExprTools", "MacroTools", "PrecompileTools", "SumTypes"]
-git-tree-sha1 = "13a3db5684411730a4e4e52cea8511bff184f649"
+deps = ["ExprTools", "MacroTools"]
+git-tree-sha1 = "e75711d70c3039c45892259e51e14b1a08358f38"
 uuid = "5fcdbb90-de43-509e-b9a6-c4d43f29cf26"
-version = "2.0.3"
+version = "3.4.1"
 
 [[deps.EarCut_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1497,12 +1497,6 @@ uuid = "4607b0f0-06f3-5cda-b6b1-a6196a1729e9"
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
 version = "7.2.1+1"
-
-[[deps.SumTypes]]
-deps = ["MacroTools", "PrecompileTools"]
-git-tree-sha1 = "900f20cc431405e75a0d260b78a5f69ceb63c8a5"
-uuid = "8e1ec7a9-0e02-4297-b0fe-6433085c89f2"
-version = "0.5.8"
 
 [[deps.TOML]]
 deps = ["Dates"]
